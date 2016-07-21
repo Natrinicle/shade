@@ -2653,11 +2653,7 @@ class OpenStackCloud(object):
         if 'properties' in image_kwargs:
             img_props = image_kwargs.pop('properties')
             for k, v in iter(img_props.items()):
-                image_kwargs[k] = str(v)
-            # some MUST be integer
-            for k in ('min_disk', 'min_ram'):
-                if k in image_kwargs:
-                    image_kwargs[k] = int(image_kwargs[k])
+                image_kwargs[k] = v
         image = self.manager.submitTask(_tasks.ImageCreate(
             name=name, **image_kwargs))
         try:
